@@ -1,6 +1,7 @@
 package io.qdivision.demo.bowling.repositories;
 
 import io.qdivision.demo.bowling.models.Game;
+import io.qdivision.demo.bowling.models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Repository;
 public class GameRepository {
 
     private final Game game;
+    private Player player;
+
 
     @Autowired
     public GameRepository() {
@@ -16,5 +19,10 @@ public class GameRepository {
 
     public Game getScoreCard() {
         return game;
+    }
+
+    public Player addPlayer(String name) {
+        game.addPlayer(name);
+        return new Player(name);
     }
 }
