@@ -4,6 +4,7 @@ package io.qdivision.demo.bowling.services;
 import io.qdivision.demo.bowling.models.Game;
 import io.qdivision.demo.bowling.models.Player;
 import io.qdivision.demo.bowling.repositories.GameRepository;
+import io.qdivision.demo.bowling.utils.GameStatus;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,7 @@ public class GameServiceTest {
                 .thenReturn(game);
 
         Assert.assertEquals(gameService.getScoreCard(), game);
+        Assert.assertEquals(game.getGameStatus(), GameStatus.INITIALIZED);
     }
 
     @Test

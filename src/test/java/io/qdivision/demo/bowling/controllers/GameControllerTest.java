@@ -3,6 +3,7 @@ package io.qdivision.demo.bowling.controllers;
 import io.qdivision.demo.bowling.models.Game;
 import io.qdivision.demo.bowling.models.Player;
 import io.qdivision.demo.bowling.services.GameService;
+import io.qdivision.demo.bowling.utils.GameStatus;
 import org.apache.coyote.Response;
 import org.junit.Assert;
 import org.junit.Test;
@@ -30,6 +31,8 @@ public class GameControllerTest {
         ResponseEntity<Game> response = gameController.getScoreCard();
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
+        Assert.assertEquals(game, response.getBody());
+        Assert.assertEquals(game.getGameStatus(), GameStatus.INITIALIZED);
         //integration test should check gameStatus from game
     }
 
