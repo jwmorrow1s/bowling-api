@@ -28,4 +28,8 @@ public class GameService {
     public Game removePlayer(int id) {
         return gameRepository.removePlayer(id);
     }
+
+    public Game patchPlayer(int id, String name) {
+        return gameRepository.patchPlayer(id, name);
+    }
 }

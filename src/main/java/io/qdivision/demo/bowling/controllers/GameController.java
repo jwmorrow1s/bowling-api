@@ -39,6 +39,12 @@ public class GameController {
         final Game game = gameService.removePlayer(pl.getId());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
     }
+
+    public ResponseEntity<Game> patchPlayer(@RequestBody Player pl) {
+        final Game game = gameService.patchPlayer(pl.getId(), pl.getName());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
+
+    }
 }
 
 

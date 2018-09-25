@@ -46,6 +46,14 @@ public class Game {
         }
     }
 
+    public void patchPlayer(int id, String name) {
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getId() == id) {
+                players.get(i).setName(name);
+            }
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,5 +70,6 @@ public class Game {
         result = 31 * result + Arrays.hashCode(getFrames());
         return result;
     }
+
 
 }

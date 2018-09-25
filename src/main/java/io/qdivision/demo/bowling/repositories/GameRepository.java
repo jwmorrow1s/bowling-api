@@ -30,4 +30,9 @@ public class GameRepository {
         game.removePlayer(id);
         return game;
     }
+
+    public Game patchPlayer(int id, String name) {
+        game.patchPlayer(id, name);
+        return game;
+    }
 }
