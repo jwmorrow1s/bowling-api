@@ -21,7 +21,11 @@ public class GameService {
         return gameRepository.getScoreCard();
     }
 
-    public Player addPlayer(String name) {
-        return gameRepository.addPlayer(name);
+    public Game addPlayer(Player player) {
+        return gameRepository.addPlayer(player);
+    }
+
+    public Game removePlayer(int id) {
+        return gameRepository.removePlayer(id);
     }
 }

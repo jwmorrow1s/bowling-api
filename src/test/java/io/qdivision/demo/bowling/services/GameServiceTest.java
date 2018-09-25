@@ -11,8 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.ResponseEntity;
 
 import java.sql.SQLOutput;
+import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameServiceTest {
@@ -22,8 +24,8 @@ public class GameServiceTest {
 
     @Test
     public void givenGameNotStarted_whenGetScoreCard_thenReturnGame(){
-        var gameService = new GameService(gameRepository);
-        var game = new Game();
+        final var gameService = new GameService(gameRepository);
+        final var game = new Game();
 
         Mockito.when(gameRepository.getScoreCard())
                 .thenReturn(game);
@@ -34,15 +36,32 @@ public class GameServiceTest {
 
     @Test
     public void givenGameHasStarted_whenPlayerAdded_thenReturnPlayersWithNewPlayerAdded(){
-        var gameService = new GameService(gameRepository);
-        var name = "Morpheus";
-        var player = new Player(name);
+        final var gameService = new GameService(gameRepository);
+        final var name = "Morpheus";
+        final var game = new Game();
+        final Player player = new Player();
+        player.setName(name);
+        game.addPlayer(player);
 
-        Mockito.when(gameRepository.addPlayer(name))
-                .thenReturn(player);
+        Mockito.when(gameRepository.addPlayer(player))
+                .thenReturn(game);
 
-        Player response = gameService.addPlayer(name);
-        Assert.assertEquals(gameService.addPlayer(name), player);
+        final Game response = gameService.addPlayer(player);
+        Assert.assertEquals(gameService.addPlayer(player), game);
+    }
+
+    @Test
+    public void givenPlayerExists_whenRemovePlayer_thenRemovePlayer(){
+        final var gameService= new GameService(gameRepository);
+        final int id = 1;
+        final String name = "Morpheus";
+        final var game = new Game();
+        final var player = new Player();
+        player.setName(name);
+
+        Mockito.when(gameRepository.removePlayer(id)).thenReturn(game);
+
+        Assert.assertNotNull(gameRepository.removePlayer(id));
     }
 
 }

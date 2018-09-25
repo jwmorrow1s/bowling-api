@@ -21,8 +21,13 @@ public class GameRepository {
         return game;
     }
 
-    public Player addPlayer(String name) {
-        game.addPlayer(name);
-        return new Player(name);
+    public Game addPlayer(Player player) {
+        game.addPlayer(player);
+        return game;
+    }
+
+    public Game removePlayer(int id) {
+        game.removePlayer(id);
+        return game;
     }
 }

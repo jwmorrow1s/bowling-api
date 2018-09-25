@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/game")
@@ -30,14 +27,18 @@ public class GameController {
     }
 
     @PostMapping
-    public ResponseEntity<Player> addPlayer(@RequestBody Player pl) {
-        final Player player = gameService.addPlayer(pl.getName());
+    public ResponseEntity<Game> addPlayer(@RequestBody Player pl) {
+        final Game game = gameService.addPlayer(pl);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(player);
+                .body(game);
     }
 
-
+    @DeleteMapping
+    public ResponseEntity<Game> removePlayer(@RequestBody Player pl) {
+        final Game game = gameService.removePlayer(pl.getId());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
+    }
 }
 
 

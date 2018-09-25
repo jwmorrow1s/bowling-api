@@ -14,6 +14,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 @RunWith(MockitoJUnitRunner.class)
 public class GameControllerTest {
 
@@ -22,13 +24,13 @@ public class GameControllerTest {
 
     @Test
     public void givenGameNotStarted_whenGetScoreCard_thenReturnScoreCardResponse(){
-        var gameController = new GameController(gameService);
-        var game = new Game();
+        final var gameController = new GameController(gameService);
+        final var game = new Game();
 
         Mockito.when(gameService.getScoreCard())
             .thenReturn(game);
 
-        ResponseEntity<Game> response = gameController.getScoreCard();
+        final ResponseEntity<Game> response = gameController.getScoreCard();
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.OK);
         Assert.assertEquals(game, response.getBody());
@@ -39,14 +41,39 @@ public class GameControllerTest {
 
     @Test
     public void givenGameHasStarted_whenPlayerAdded_thenReturnPlayersWithNewPlayerAdded() {
-        var gameController = new GameController(gameService);
-        var name = "Morpheus";
-        var player = new Player(name);
+        final var gameController = new GameController(gameService);
+        final var name = "Morpheus";
+        final var game = new Game();
+        final var pl = new Player();
+        pl.setName(name);
+        game.addPlayer(pl);
+        List<Player> players = game.getPlayers();
+        Player player = players.stream()
+                .filter( p -> p.getName() == name)
+                .findFirst()
+                .get();
 
-        Mockito.when(gameService.addPlayer(name)).thenReturn(player);
+        Mockito.when(gameService.addPlayer(pl)).thenReturn(game);
 
-        ResponseEntity<Player> response = gameController.addPlayer(player);
+        ResponseEntity<Game> response = gameController.addPlayer(player);
         Assert.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
-        Assert.assertNotNull(gameController.addPlayer(player));
+        Assert.assertEquals(gameController.addPlayer(player).getBody(), game);
+    }
+
+    @Test
+    public void givenPlayerExists_whenRemovePlayer_thenRemovePlayerResponse(){
+        final var gameController = new GameController(gameService);
+        final int id = 1;
+        final String name = "Morpheus";
+        final var game = new Game();
+        final var player = new Player();
+        player.setName(name);
+
+        Mockito.when(gameService.removePlayer(id)).thenReturn(game);
+        ResponseEntity<Game> response = gameController.removePlayer(player);
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
+
+
     }
 }
