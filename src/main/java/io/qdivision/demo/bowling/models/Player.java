@@ -7,6 +7,11 @@ public class Player {
     private final Turn[] turns;
     private String name;
 
+
+    public Player() {
+        this.turns = new Turn[10];
+    }
+
     public Player(String name) {
         this.turns = new Turn[10];
         this.name = name;

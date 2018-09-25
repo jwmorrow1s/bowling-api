@@ -30,8 +30,8 @@ public class GameController {
     }
 
     @PostMapping
-    public ResponseEntity<Player> addPlayer(@RequestBody String name) {
-        final Player player = gameService.addPlayer(name);
+    public ResponseEntity<Player> addPlayer(@RequestBody Player pl) {
+        final Player player = gameService.addPlayer(pl.getName());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(player);

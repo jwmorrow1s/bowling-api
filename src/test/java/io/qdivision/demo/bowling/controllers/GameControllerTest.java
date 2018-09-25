@@ -34,16 +34,16 @@ public class GameControllerTest {
     }
 
 
-    //@Test
-//    public void givenGameHasStarted_whenPlayerAdded_thenReturnPlayersWithNewPlayerAdded() {
-//        var gameController = new GameController(gameService);
-//        var name = "Morpheus";
-//        var player = new Player(name);
-//
-//        Mockito.when(gameService.addPlayer(name)).thenReturn(player);
-//
-//        ResponseEntity<Player> response = gameController.addPlayer(name);
-//        Assert.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
-//        Assert.assertNotNull(gameController.addPlayer(name));
-//    }
+    @Test
+    public void givenGameHasStarted_whenPlayerAdded_thenReturnPlayersWithNewPlayerAdded() {
+        var gameController = new GameController(gameService);
+        var name = "Morpheus";
+        var player = new Player(name);
+
+        Mockito.when(gameService.addPlayer(name)).thenReturn(player);
+
+        ResponseEntity<Player> response = gameController.addPlayer(player);
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        Assert.assertNotNull(gameController.addPlayer(player));
+    }
 }
