@@ -9,8 +9,5 @@
         <module name="bowling" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="bowling" target="10" />
-    </bytecodeTargetLevel>
   </component>
 </project>
