@@ -42,4 +42,9 @@ public class GameRepository {
         game.patchPlayer(id, name);
         return game;
     }
+
+    public Game addScore(int id, int cardinality, int score) {
+        game.addScore(id, cardinality, score);
+        return game;
+    }
 }

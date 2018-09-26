@@ -4,25 +4,31 @@ import io.qdivision.demo.bowling.utils.FrameScore;
 
 public class Frame {
 
-    private int firstRoll;
-    private int secondRoll;
-    private int thirdRoll;
+    private Integer firstRoll;
+    private Integer secondRoll;
+    private Integer thirdRoll;
     private FrameScore score;
-    private final int cardinality;
 
-    public Frame(int cardinality) {
+
+
+    private Integer cardinality;
+    private Integer currentRoll;
+
+    public Frame() {}
+
+    public Frame(Integer cardinality) {
         this.cardinality = cardinality;
     }
 
-    public void setFirstRoll(int firstRoll) {
+    public void setFirstRoll(Integer firstRoll) {
         this.firstRoll = firstRoll;
     }
 
-    public void setSecondRoll(int secondRoll) {
+    public void setSecondRoll(Integer secondRoll) {
         this.secondRoll = secondRoll;
     }
 
-    public void setThirdRoll(int thirdRoll) {
+    public void setThirdRoll(Integer thirdRoll) {
         this.thirdRoll = thirdRoll;
     }
 
@@ -30,19 +36,27 @@ public class Frame {
         this.score = score;
     }
 
-    public int getFirstRoll() {
+    public void setCurrentRoll(Integer currentRoll) { this.currentRoll = currentRoll; }
+
+    public Integer getCurrentRoll() { return currentRoll; }
+
+    public Integer getFirstRoll() {
         return firstRoll;
     }
 
-    public int getSecondRoll() {
+    public Integer getSecondRoll() {
         return secondRoll;
     }
 
-    public int getThirdRoll() {
+    public Integer getThirdRoll() {
         return thirdRoll;
     }
 
-    public int getCardinality() {
+    public Integer getCardinality() {
         return cardinality;
     }
+
+    public void setCardinality(Integer cardinality) { this.cardinality = cardinality; }
+
+
 }

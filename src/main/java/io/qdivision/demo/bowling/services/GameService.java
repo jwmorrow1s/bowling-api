@@ -41,7 +41,7 @@ public class GameService {
     }
 
 
-
-
-
+    public Game addScore(int id, Integer cardinality, int score) {
+        return gameRepository.addScore(id, cardinality, score);
+    }
 }

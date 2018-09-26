@@ -1,5 +1,6 @@
 package io.qdivision.demo.bowling.controllers;
 
+import io.qdivision.demo.bowling.models.Frame;
 import io.qdivision.demo.bowling.models.Game;
 import io.qdivision.demo.bowling.models.Player;
 import io.qdivision.demo.bowling.services.GameService;
@@ -50,6 +51,12 @@ public class GameController {
     @PatchMapping
     public ResponseEntity<Game> patchPlayer(@RequestBody Player pl) {
         final Game game = gameService.patchPlayer(pl.getId(), pl.getName());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
+    }
+
+    @PostMapping("/player/{playerId}")
+    public ResponseEntity<Game> addScore(@PathVariable("playerId") int playerId, @RequestBody Frame frame) {
+        final Game game = gameService.addScore(playerId, frame.getCardinality(), frame.getCurrentRoll());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
     }
 }
