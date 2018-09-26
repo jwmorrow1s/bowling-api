@@ -12,9 +12,12 @@ public class Game {
 
     private GameStatus gameStatus;
     private final List<Player> players;
+    private int gameId;
+    private static int counter = 99;
 
 
     public Game() {
+        gameId = ++counter;
         players = new ArrayList<>();
         gameStatus = GameStatus.INITIALIZED;
     }
@@ -35,6 +38,10 @@ public class Game {
 
     public List<Player> getPlayers() {
         return players;
+    }
+
+    public int getGameId() {
+        return gameId;
     }
 
     public void removePlayer(int id) {
@@ -66,4 +73,6 @@ public class Game {
     public int hashCode() {
         return Objects.hash(getGameStatus(), getPlayers());
     }
+
+
 }
