@@ -32,4 +32,8 @@ public class GameService {
     public Game patchPlayer(int id, String name) {
         return gameRepository.patchPlayer(id, name);
     }
+
+
+
+
 }
