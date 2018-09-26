@@ -2,7 +2,9 @@ package io.qdivision.demo.bowling.repositories;
 
 import io.qdivision.demo.bowling.models.Game;
 import io.qdivision.demo.bowling.models.Player;
+import io.qdivision.demo.bowling.utils.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -28,6 +30,11 @@ public class GameRepository {
 
     public Game removePlayer(int id) {
         game.removePlayer(id);
+        return game;
+    }
+
+    public Game gameTimeStarted(GameStatus incomingGameStatus) {
+        game.setGameStatus(incomingGameStatus);
         return game;
     }
 }

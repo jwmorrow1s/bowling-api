@@ -56,4 +56,14 @@ public class GameRepositoryTest {
                 .findFirst()
                 .isPresent());
     }
+
+    @Test
+    public void givenGameNotStarted_whenStartGame_thenReturnGameWithUpdatedStatusInProgress(){
+        final var gameRepository = new GameRepository();
+        final var incomingGameStatus = GameStatus.IN_PROGRESS;
+        Game response = gameRepository.gameTimeStarted(incomingGameStatus);
+
+        Assert.assertEquals(response.getGameStatus(), GameStatus.IN_PROGRESS);
+    }
+
 }

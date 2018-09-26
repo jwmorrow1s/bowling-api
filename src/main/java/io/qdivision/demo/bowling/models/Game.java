@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 
 public class Game {
 
-    private final GameStatus gameStatus;
+    private GameStatus gameStatus;
     private final List<Player> players;
     private final Frame[] frames;
 
     public Game() {
-        this.frames = new Frame[10];
-        this.players = new ArrayList<>();
+        frames = new Frame[10];
+        players = new ArrayList<>();
         gameStatus = GameStatus.INITIALIZED;
     }
 
@@ -24,10 +24,13 @@ public class Game {
         return gameStatus;
     }
 
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
     public Frame[] getFrames() {
         return frames;
     }
-
 
     public void addPlayer(Player player) {
         players.add(player);
@@ -36,7 +39,6 @@ public class Game {
     public List<Player> getPlayers() {
         return players;
     }
-
 
     public void removePlayer(int id) {
         for(int i = 0; i < players.size(); i++){

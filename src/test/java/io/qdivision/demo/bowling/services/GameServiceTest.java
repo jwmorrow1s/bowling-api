@@ -64,4 +64,18 @@ public class GameServiceTest {
         Assert.assertNotNull(gameRepository.removePlayer(id));
     }
 
+    @Test
+    public void givenGameNotStarted_whenStartGame_thenReturnGame(){
+        final var gameService = new GameService(gameRepository);
+        final var game = new Game();
+        final var incomingGameStatus = GameStatus.IN_PROGRESS;
+        game.setGameStatus(incomingGameStatus);
+
+        Mockito.when(gameRepository.gameTimeStarted(incomingGameStatus)).thenReturn(game);
+
+        Game response = gameService.gameTimeStarted(incomingGameStatus);
+
+        Assert.assertTrue(response instanceof Game);
+    }
+
 }

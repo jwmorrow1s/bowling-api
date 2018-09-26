@@ -73,7 +73,20 @@ public class GameControllerTest {
         ResponseEntity<Game> response = gameController.removePlayer(player);
 
         Assert.assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
+    }
 
+    @Test
+    public void givenGameNotStarted_whenStartGame_thenHttpStatusAccepted(){
+        final var gameController = new GameController(gameService);
+        final var game = new Game();
+        final var incomingGameStatus = GameStatus.IN_PROGRESS;
+        game.setGameStatus(incomingGameStatus);
 
+        Mockito.when(gameService.gameTimeStarted(incomingGameStatus)).thenReturn(game);
+
+        ResponseEntity<Game> response = gameController.gameTimeStarted(game);
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
+        Assert.assertTrue(response.getBody() instanceof Game);
     }
 }

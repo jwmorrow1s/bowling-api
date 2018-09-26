@@ -3,7 +3,9 @@ package io.qdivision.demo.bowling.services;
 import io.qdivision.demo.bowling.models.Game;
 import io.qdivision.demo.bowling.models.Player;
 import io.qdivision.demo.bowling.repositories.GameRepository;
+import io.qdivision.demo.bowling.utils.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,5 +29,9 @@ public class GameService {
 
     public Game removePlayer(int id) {
         return gameRepository.removePlayer(id);
+    }
+
+    public Game gameTimeStarted(GameStatus incomingGameStatus) {
+        return gameRepository.gameTimeStarted(incomingGameStatus);
     }
 }

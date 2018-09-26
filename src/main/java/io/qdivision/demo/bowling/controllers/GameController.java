@@ -3,6 +3,7 @@ package io.qdivision.demo.bowling.controllers;
 import io.qdivision.demo.bowling.models.Game;
 import io.qdivision.demo.bowling.models.Player;
 import io.qdivision.demo.bowling.services.GameService;
+import io.qdivision.demo.bowling.utils.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,12 @@ public class GameController {
     @DeleteMapping
     public ResponseEntity<Game> removePlayer(@RequestBody Player pl) {
         final Game game = gameService.removePlayer(pl.getId());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
+    }
+
+    @PostMapping("/start")
+    public ResponseEntity<Game> gameTimeStarted(@RequestBody Game g) {
+        final Game game = gameService.gameTimeStarted(g.getGameStatus());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
     }
 }
