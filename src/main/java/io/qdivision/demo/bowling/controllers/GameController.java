@@ -51,7 +51,6 @@ public class GameController {
     public ResponseEntity<Game> patchPlayer(@RequestBody Player pl) {
         final Game game = gameService.patchPlayer(pl.getId(), pl.getName());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
-
     }
 }
 

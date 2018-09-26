@@ -13,6 +13,7 @@ public class Game {
     private GameStatus gameStatus;
     private final List<Player> players;
 
+
     public Game() {
         players = new ArrayList<>();
         gameStatus = GameStatus.INITIALIZED;
