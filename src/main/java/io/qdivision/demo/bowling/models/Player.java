@@ -1,18 +1,23 @@
 package io.qdivision.demo.bowling.models;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Player {
 
-    private final Turn[] turns;
+    private final List<Frame> frames;
     private String name;
     private int id;
     private static int counter = 0;
 
     //constructor for Jackson
     public Player() {
-        this.turns = new Turn[10];
+        frames = IntStream.range(1,11)
+                .mapToObj(i -> new Frame(i))
+                .collect(Collectors.toCollection(ArrayList::new));
         id = ++counter;
     }
 
@@ -32,19 +37,21 @@ public class Player {
         this.id = id;
     }
 
+    public List<Frame> getFrames() {
+        return frames;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Player)) return false;
         Player player = (Player) o;
-        return Arrays.equals(turns, player.turns) &&
+        return getId() == player.getId() &&
                 Objects.equals(getName(), player.getName());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getName());
-        result = 31 * result + Arrays.hashCode(turns);
-        return result;
+        return Objects.hash(getName(), getId());
     }
 }

@@ -12,10 +12,8 @@ public class Game {
 
     private GameStatus gameStatus;
     private final List<Player> players;
-    private final Frame[] frames;
 
     public Game() {
-        frames = new Frame[10];
         players = new ArrayList<>();
         gameStatus = GameStatus.INITIALIZED;
     }
@@ -29,10 +27,6 @@ public class Game {
         this.gameStatus = gameStatus;
     }
 
-
-    public Frame[] getFrames() {
-        return frames;
-    }
 
     public void addPlayer(Player player) {
         players.add(player);
@@ -64,16 +58,11 @@ public class Game {
         if (!(o instanceof Game)) return false;
         Game game = (Game) o;
         return getGameStatus() == game.getGameStatus() &&
-                Objects.equals(getPlayers(), game.getPlayers()) &&
-                Arrays.equals(getFrames(), game.getFrames());
+                Objects.equals(getPlayers(), game.getPlayers());
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getGameStatus(), getPlayers());
-        result = 31 * result + Arrays.hashCode(getFrames());
-        return result;
+        return Objects.hash(getGameStatus(), getPlayers());
     }
-
-
 }

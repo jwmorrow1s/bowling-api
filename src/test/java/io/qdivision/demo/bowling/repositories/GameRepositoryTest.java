@@ -15,7 +15,7 @@ public class GameRepositoryTest {
     public void givenGameNotStarted_whenGetScoreCard_thenReturnNewGameAndGameStatusInitializing(){
         final var game = new Game();
 
-        Assert.assertNotNull(game.getFrames());
+
         Assert.assertEquals(game.getGameStatus(), GameStatus.INITIALIZED);
     }
 
