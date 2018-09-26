@@ -41,10 +41,17 @@ public class GameController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
     }
 
+
     @PostMapping("/start")
     public ResponseEntity<Game> gameTimeStarted(@RequestBody Game g) {
         final Game game = gameService.gameTimeStarted(g.getGameStatus());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
+    }
+    @PatchMapping
+    public ResponseEntity<Game> patchPlayer(@RequestBody Player pl) {
+        final Game game = gameService.patchPlayer(pl.getId(), pl.getName());
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
+
     }
 }
 

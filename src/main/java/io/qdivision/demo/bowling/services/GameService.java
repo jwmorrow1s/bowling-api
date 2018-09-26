@@ -31,7 +31,17 @@ public class GameService {
         return gameRepository.removePlayer(id);
     }
 
+
     public Game gameTimeStarted(GameStatus incomingGameStatus) {
         return gameRepository.gameTimeStarted(incomingGameStatus);
     }
+
+    public Game patchPlayer(int id, String name) {
+        return gameRepository.patchPlayer(id, name);
+    }
+
+
+
+
+
 }

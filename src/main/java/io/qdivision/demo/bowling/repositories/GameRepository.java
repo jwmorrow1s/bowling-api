@@ -33,8 +33,13 @@ public class GameRepository {
         return game;
     }
 
+
     public Game gameTimeStarted(GameStatus incomingGameStatus) {
         game.setGameStatus(incomingGameStatus);
+        return game;
+    }
+    public Game patchPlayer(int id, String name) {
+        game.patchPlayer(id, name);
         return game;
     }
 }
