@@ -82,4 +82,23 @@ public class GameRepositoryTest {
 
         Assert.assertTrue(score == updatedScore);
     }
+
+    @Test
+    public void givenPlayerExistsAndOneScoreAlreadyExists_whenPostAddScoreToPlayer_thenReturnGameWithSecondScoreAdded() {
+        final var gameRepository = new GameRepository();
+        final int id = 1;
+        final int firstScore = 5;
+        final int secondScore = 5;
+        final int frameNumber = 1;
+        final String name = "Morpheus";
+        Player player = new Player();
+        player.setName(name);
+        Game response = gameRepository.addPlayer(player);
+        response = gameRepository.addScore(id, frameNumber, firstScore);
+        response = gameRepository.addScore(id, frameNumber, secondScore);
+        Integer updatedScore = response.getPlayerById(id).getFrameByFrameNumber(frameNumber).getSecondRoll();
+
+        Assert.assertTrue(secondScore == updatedScore);
+    }
+
 }

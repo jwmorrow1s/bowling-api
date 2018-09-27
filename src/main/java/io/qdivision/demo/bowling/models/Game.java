@@ -22,15 +22,16 @@ public class Game {
         gameStatus = GameStatus.INITIALIZED;
     }
 
-    public void addScore(int id, int cardinality, int score) {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getId() == id) {
-                players.get(i)
-                        .getFrames()
-                        .get(cardinality-1)
-                        .setFirstRoll(score);
-            }
+    public void addScore(int id, int frameNumber, int score) {
+        Frame activeFrame = getPlayerById(id)
+                .getFrameByFrameNumber(frameNumber);
+
+        if(activeFrame.getFirstRoll() == null){
+            activeFrame.setFirstRoll(score);
+        } else {
+            activeFrame.setSecondRoll(score);
         }
+
     }
 
     public GameStatus getGameStatus() {

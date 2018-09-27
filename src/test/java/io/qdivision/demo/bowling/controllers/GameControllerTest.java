@@ -107,4 +107,21 @@ public class GameControllerTest {
         Assert.assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
         Assert.assertTrue(response.getBody() instanceof Game);
     }
+
+    @Test
+    public void givenPlayersExistAndOneScoreAlreadyExists_whenAddScoreToPlayer_thenReturnHttpStatusAcceptedAndGame(){
+        final var gameController = new GameController(gameService);
+        final var game = new Game();
+        final int id = 1;
+        final int score = 5;
+        Frame myFrame = new Frame(1);
+        myFrame.setCurrentRoll(score);
+
+        Mockito.when(gameService.addScore(id, myFrame.getFrameNumber(), score)).thenReturn(game);
+
+        ResponseEntity<Game> response = gameController.addScore(id, myFrame);
+
+        Assert.assertEquals(response.getStatusCode(), HttpStatus.ACCEPTED);
+        Assert.assertTrue(response.getBody() instanceof Game);
+    }
 }
