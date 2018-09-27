@@ -47,14 +47,20 @@ public class Game {
         }
 
         if(prevFrame != null){
-
             if(prevFrame.getFrameType() == FrameType.SPARE
                     && activeFrame.getFirstRoll() == null){
                 prevFrame.setTotal(prevFrame.getTotal() + score + 10);
             }
         }
 
-        
+        if (prevPrevFrame != null) {
+            if(prevPrevFrame.getFrameType()==FrameType.STRIKE
+            && prevFrame.getFrameType()==FrameType.STRIKE) {
+                if(activeFrame.getFirstRoll() == null) {
+                    prevPrevFrame.setTotal(20 + score);
+                }
+            }
+        }
 
         if(activeFrame.getFirstRoll() == null){
             activeFrame.setFirstRoll(score);
