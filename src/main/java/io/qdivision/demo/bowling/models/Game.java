@@ -54,6 +54,8 @@ public class Game {
             }
         }
 
+        
+
         if(activeFrame.getFirstRoll() == null){
             activeFrame.setFirstRoll(score);
             if(score == 10){
