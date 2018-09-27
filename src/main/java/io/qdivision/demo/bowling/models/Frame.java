@@ -1,14 +1,14 @@
 package io.qdivision.demo.bowling.models;
 
-import io.qdivision.demo.bowling.utils.FrameScore;
+import io.qdivision.demo.bowling.utils.FrameType;
 
 public class Frame {
 
     private Integer firstRoll;
     private Integer secondRoll;
     private Integer thirdRoll;
-    private FrameScore score;
-
+    private FrameType frameType;
+    private int total;
 
 
     private Integer frameNumber;
@@ -18,6 +18,8 @@ public class Frame {
 
     public Frame(Integer frameNumber) {
         this.frameNumber = frameNumber;
+        frameType = FrameType.OPEN;
+        total = 0;
     }
 
     public void setFirstRoll(Integer firstRoll) {
@@ -32,8 +34,12 @@ public class Frame {
         this.thirdRoll = thirdRoll;
     }
 
-    public void setScore(FrameScore score) {
-        this.score = score;
+    public FrameType getFrameType() {
+        return frameType;
+    }
+
+    public void setFrameType(FrameType frameType) {
+        this.frameType = frameType;
     }
 
     public void setCurrentRoll(Integer currentRoll) { this.currentRoll = currentRoll; }
@@ -58,5 +64,11 @@ public class Frame {
 
     public void setFrameNumber(Integer frameNumber) { this.frameNumber = frameNumber; }
 
+    public int getTotal() {
+        return total;
+    }
 
+    public void setTotal(int total) {
+        this.total = total;
+    }
 }

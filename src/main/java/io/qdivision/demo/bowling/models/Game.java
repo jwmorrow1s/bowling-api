@@ -1,5 +1,6 @@
 package io.qdivision.demo.bowling.models;
 
+import io.qdivision.demo.bowling.utils.FrameType;
 import io.qdivision.demo.bowling.utils.GameStatus;
 
 import java.util.ArrayList;
@@ -25,12 +26,41 @@ public class Game {
     public void addScore(int id, int frameNumber, int score) {
         Frame activeFrame = getPlayerById(id)
                 .getFrameByFrameNumber(frameNumber);
+        Frame prevFrame = frameNumber > 1 ?
+                getPlayerById(id)
+                        .getFrameByFrameNumber(frameNumber - 1)
+                : null;
+        Frame prevPrevFrame = frameNumber > 2 ?
+                getPlayerById(id)
+                        .getFrameByFrameNumber(frameNumber - 2)
+                : null;
+
+
+        if(prevFrame != null){
+            if(prevFrame.getFrameType() == FrameType.STRIKE){
+                int bonus = 0;
+                if(activeFrame.getFirstRoll() == null){
+                    bonus = 10;
+                }
+                prevFrame.setTotal(prevFrame.getTotal() + score + bonus);
+            }
+        }
 
         if(activeFrame.getFirstRoll() == null){
             activeFrame.setFirstRoll(score);
+            if(score == 10){
+                activeFrame.setFrameType(FrameType.STRIKE);
+            }
         } else {
             activeFrame.setSecondRoll(score);
+            if(score + activeFrame.getFirstRoll() == 10){
+                activeFrame.setFrameType(FrameType.SPARE);
+            } else{
+                activeFrame.setTotal(activeFrame.getFirstRoll() + score);
+            }
         }
+
+
 
     }
 

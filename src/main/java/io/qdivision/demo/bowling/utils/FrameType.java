@@ -1,6 +1,6 @@
 package io.qdivision.demo.bowling.utils;
 
-public enum FrameScore {
+public enum FrameType {
     OPEN,
     STRIKE,
     SPARE
