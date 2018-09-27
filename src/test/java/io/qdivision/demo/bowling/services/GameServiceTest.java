@@ -78,4 +78,18 @@ public class GameServiceTest {
         Assert.assertTrue(response instanceof Game);
     }
 
+    @Test
+    public void givenPlayerExists_whenPostAddScoreToPlayer_thenReturnTypeGame() {
+        final var gameService = new GameService(gameRepository);
+        final var game = new Game();
+        final int id = 1;
+        final int score = 5;
+        final int frameNumber = 1;
+
+        Mockito.when(gameRepository.addScore(id, frameNumber, score)).thenReturn(game);
+
+        Game response = gameService.addScore(id, frameNumber, score);
+        Assert.assertTrue(response instanceof Game);
+    }
+
 }

@@ -66,4 +66,20 @@ public class GameRepositoryTest {
         Assert.assertEquals(response.getGameStatus(), GameStatus.IN_PROGRESS);
     }
 
+
+    @Test
+    public void givenPlayerExists_whenPostAddScoreToPlayer_thenReturnGamewithScoreAdded() {
+        final var gameRepository = new GameRepository();
+        final int id = 1;
+        final int score = 5;
+        final int frameNumber = 1;
+        final String name = "Morpheus";
+        Player player = new Player();
+        player.setName(name);
+        Game response = gameRepository.addPlayer(player);
+        response = gameRepository.addScore(id, frameNumber, score);
+        Integer updatedScore = response.getPlayerById(id).getFrameByFrameNumber(frameNumber).getFirstRoll();
+
+        Assert.assertTrue(score == updatedScore);
+    }
 }

@@ -21,6 +21,13 @@ public class Player {
         id = ++counter;
     }
 
+    public Frame getFrameByFrameNumber(int frameNumber){
+        return frames.stream()
+                .filter(f -> f.getFrameNumber() == frameNumber)
+                .findFirst()
+                .get();
+    }
+
     public String getName() {
         return name;
     }

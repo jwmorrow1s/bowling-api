@@ -11,13 +11,13 @@ public class Frame {
 
 
 
-    private Integer cardinality;
+    private Integer frameNumber;
     private Integer currentRoll;
 
     public Frame() {}
 
-    public Frame(Integer cardinality) {
-        this.cardinality = cardinality;
+    public Frame(Integer frameNumber) {
+        this.frameNumber = frameNumber;
     }
 
     public void setFirstRoll(Integer firstRoll) {
@@ -52,11 +52,11 @@ public class Frame {
         return thirdRoll;
     }
 
-    public Integer getCardinality() {
-        return cardinality;
+    public Integer getFrameNumber() {
+        return frameNumber;
     }
 
-    public void setCardinality(Integer cardinality) { this.cardinality = cardinality; }
+    public void setFrameNumber(Integer frameNumber) { this.frameNumber = frameNumber; }
 
 
 }

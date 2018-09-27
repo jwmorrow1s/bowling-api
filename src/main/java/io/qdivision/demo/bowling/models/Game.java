@@ -37,6 +37,12 @@ public class Game {
         return gameStatus;
     }
 
+    public Player getPlayerById(int playerId){
+        return players.stream()
+                .filter(p -> p.getId() == playerId)
+                .findFirst()
+                .get();
+    }
 
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;

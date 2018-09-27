@@ -4,7 +4,6 @@ import io.qdivision.demo.bowling.models.Frame;
 import io.qdivision.demo.bowling.models.Game;
 import io.qdivision.demo.bowling.models.Player;
 import io.qdivision.demo.bowling.services.GameService;
-import io.qdivision.demo.bowling.utils.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +55,7 @@ public class GameController {
 
     @PostMapping("/player/{playerId}")
     public ResponseEntity<Game> addScore(@PathVariable("playerId") int playerId, @RequestBody Frame frame) {
-        final Game game = gameService.addScore(playerId, frame.getCardinality(), frame.getCurrentRoll());
+        final Game game = gameService.addScore(playerId, frame.getFrameNumber(), frame.getCurrentRoll());
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(game);
     }
 }

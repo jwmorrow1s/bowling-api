@@ -43,8 +43,8 @@ public class GameRepository {
         return game;
     }
 
-    public Game addScore(int id, int cardinality, int score) {
-        game.addScore(id, cardinality, score);
+    public Game addScore(int id, int frameNumber, int score) {
+        game.addScore(id, frameNumber, score);
         return game;
     }
 }
