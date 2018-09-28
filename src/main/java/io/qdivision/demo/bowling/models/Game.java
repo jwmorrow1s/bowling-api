@@ -139,6 +139,7 @@ public class Game {
         }
         getPlayerById(id).tallyPlayerTotal();
         tallyGameTotal();
+        
     }
 
     public void tallyGameTotal() {
