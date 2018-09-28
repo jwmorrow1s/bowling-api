@@ -131,7 +131,6 @@ public class Game {
                 activeFrame.setFrameType(FrameType.TENTH_CLOSED);
             }
 
-
         }
 
 
