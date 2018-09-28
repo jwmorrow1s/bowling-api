@@ -3,5 +3,6 @@ package io.qdivision.demo.bowling.utils;
 public enum FrameType {
     OPEN,
     STRIKE,
-    SPARE
+    SPARE,
+    TENTH_CLOSED
 }

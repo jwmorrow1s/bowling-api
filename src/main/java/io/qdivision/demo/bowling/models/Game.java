@@ -128,6 +128,7 @@ public class Game {
             else if (tenthFrameTotal >= 10 && activeFrame.getSecondRoll() != null) {
                 activeFrame.setThirdRoll(score);
                 activeFrame.setTotal(tenthFrameTotal);
+                activeFrame.setFrameType(FrameType.TENTH_CLOSED);
             }
 
 
