@@ -16,7 +16,7 @@ public class Game {
     private int gameId;
     private static int counter = 99;
     private static int tenthFrameTotal = 0;
-    private static int gameTotal = 0;
+    private int gameTotal = 0;
 
 
     public Game() {
@@ -138,8 +138,14 @@ public class Game {
             }
         }
         getPlayerById(id).tallyPlayerTotal();
+        tallyGameTotal();
     }
 
+    public void tallyGameTotal() {
+        gameTotal = getPlayers().stream()
+                .map(p -> p.getPlayerTotal())
+                .reduce(0, (acc, curr) -> acc + curr);
+    }
 
     public GameStatus getGameStatus() {
         return gameStatus;
@@ -167,6 +173,10 @@ public class Game {
 
     public int getGameId() {
         return gameId;
+    }
+
+    public int getGameTotal() {
+        return gameTotal;
     }
 
     public void removePlayer(int id) {
