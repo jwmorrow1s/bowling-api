@@ -85,13 +85,52 @@ public class Game {
 
 
         if(activeFrame.getFrameNumber() == 10) {
-            tenthFrameTotal += score;
-            if (activeFrame.getFrameType() != FrameType.OPEN) {
-                if (activeFrame.getSecondRoll() != null) {
-                    activeFrame.setThirdRoll(score);
-                    activeFrame.setTotal(tenthFrameTotal);
+            if(prevFrame != null){
+                if(prevFrame.getFrameType() == FrameType.STRIKE){
+                    int bonus = 0;
+                    if(activeFrame.getFirstRoll() == null){
+                        bonus = 10;
+                    }
+                    if(activeFrame.getSecondRoll() == null) {
+                        prevFrame.setTotal(prevFrame.getTotal() + score + bonus);
+                    }
                 }
             }
+
+            if(prevFrame != null){
+                if(prevFrame.getFrameType() == FrameType.SPARE
+                        && activeFrame.getFirstRoll() == null){
+                    prevFrame.setTotal(prevFrame.getTotal() + score + 10);
+                }
+            }
+
+            if (prevPrevFrame != null) {
+                if(prevPrevFrame.getFrameType()==FrameType.STRIKE
+                        && prevFrame.getFrameType()==FrameType.STRIKE) {
+                    if(activeFrame.getFirstRoll() == null) {
+                        prevPrevFrame.setTotal(20 + score);
+                    }
+                }
+            }
+
+
+
+            tenthFrameTotal += score;
+            if (activeFrame.getFirstRoll() == null) {
+                activeFrame.setFirstRoll(score);
+            }
+
+            else if (activeFrame.getFirstRoll() != null && activeFrame.getSecondRoll() == null) {
+                activeFrame.setSecondRoll(score);
+                activeFrame.setTotal(tenthFrameTotal);
+            }
+
+            else if (tenthFrameTotal >= 10 && activeFrame.getSecondRoll() != null) {
+                activeFrame.setThirdRoll(score);
+                activeFrame.setTotal(tenthFrameTotal);
+            }
+
+
         }
 
 
