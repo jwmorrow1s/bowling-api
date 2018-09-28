@@ -128,7 +128,7 @@ public class Game {
                 activeFrame.setSecondRoll(score);
                 activeFrame.setTotal(tenthFrameTotal);
                 if (tenthFrameTotal < 10) {
-                    setGameStatus(GameStatus.COMPLETE);
+                    
                 }
             }
 
@@ -136,7 +136,7 @@ public class Game {
                 activeFrame.setThirdRoll(score);
                 activeFrame.setTotal(tenthFrameTotal);
                 activeFrame.setFrameType(FrameType.TENTH_CLOSED);
-                setGameStatus(GameStatus.COMPLETE);
+
             }
         }
         getPlayerById(id).tallyPlayerTotal();
