@@ -16,6 +16,7 @@ public class Game {
     private int gameId;
     private static int counter = 99;
     private static int tenthFrameTotal = 0;
+    private static int gameTotal = 0;
 
 
     public Game() {
@@ -25,6 +26,7 @@ public class Game {
     }
 
     public void addScore(int id, int frameNumber, int score) {
+
         Frame activeFrame = getPlayerById(id)
                 .getFrameByFrameNumber(frameNumber);
         Frame prevFrame = frameNumber > 1 ?
@@ -36,6 +38,7 @@ public class Game {
                         .getFrameByFrameNumber(frameNumber - 2)
                 : null;
 
+        //1st - 9th frames behaviour
         if(activeFrame.getFrameNumber() != 10) {
             if(prevFrame != null){
                 if(prevFrame.getFrameType() == FrameType.STRIKE){
@@ -83,7 +86,7 @@ public class Game {
         }
 
 
-
+        //tenth frame behaviour
         if(activeFrame.getFrameNumber() == 10) {
             if(prevFrame != null){
                 if(prevFrame.getFrameType() == FrameType.STRIKE){
@@ -114,7 +117,6 @@ public class Game {
             }
 
 
-
             tenthFrameTotal += score;
             if (activeFrame.getFirstRoll() == null) {
                 activeFrame.setFirstRoll(score);
@@ -123,19 +125,21 @@ public class Game {
             else if (activeFrame.getFirstRoll() != null && activeFrame.getSecondRoll() == null) {
                 activeFrame.setSecondRoll(score);
                 activeFrame.setTotal(tenthFrameTotal);
+                if (tenthFrameTotal < 10) {
+                    setGameStatus(GameStatus.COMPLETE);
+                }
             }
 
             else if (tenthFrameTotal >= 10 && activeFrame.getSecondRoll() != null) {
                 activeFrame.setThirdRoll(score);
                 activeFrame.setTotal(tenthFrameTotal);
                 activeFrame.setFrameType(FrameType.TENTH_CLOSED);
+                setGameStatus(GameStatus.COMPLETE);
             }
-
         }
-
-
-
+        getPlayerById(id).tallyPlayerTotal();
     }
+
 
     public GameStatus getGameStatus() {
         return gameStatus;

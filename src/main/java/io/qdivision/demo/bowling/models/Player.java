@@ -12,6 +12,7 @@ public class Player {
     private String name;
     private int id;
     private static int counter = 0;
+    private int playerTotal;
 
     //constructor for Jackson
     public Player() {
@@ -19,6 +20,7 @@ public class Player {
                 .mapToObj(i -> new Frame(i))
                 .collect(Collectors.toCollection(ArrayList::new));
         id = ++counter;
+        playerTotal = 0;
     }
 
     public Frame getFrameByFrameNumber(int frameNumber){
@@ -40,8 +42,14 @@ public class Player {
         return id;
     }
 
-    public void setId(int id){
-        this.id = id;
+
+    public int getPlayerTotal() { return playerTotal; }
+
+
+    public void tallyPlayerTotal() {
+        playerTotal = frames.stream()
+                    .map(f -> f.getTotal())
+                    .reduce(0, (acc, curr) -> acc + curr);
     }
 
     public List<Frame> getFrames() {
