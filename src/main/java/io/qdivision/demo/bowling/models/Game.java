@@ -1,5 +1,6 @@
 package io.qdivision.demo.bowling.models;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.qdivision.demo.bowling.utils.FrameType;
 import io.qdivision.demo.bowling.utils.GameStatus;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@JsonPropertyOrder({"gameId", "gameStatus", "gameTotal", "players"})
 public class Game {
 
     private GameStatus gameStatus;
@@ -139,7 +141,10 @@ public class Game {
         }
         getPlayerById(id).tallyPlayerTotal();
         tallyGameTotal();
-        
+        //if there does not exist a player that is not complete, then the game is finished.
+        if(!players.stream().filter(p -> !p.isPlayerComplete()).findFirst().isPresent()){
+            gameStatus = GameStatus.COMPLETE;
+        }
     }
 
     public void tallyGameTotal() {

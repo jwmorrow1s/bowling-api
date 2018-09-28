@@ -1,13 +1,17 @@
 package io.qdivision.demo.bowling.models;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.qdivision.demo.bowling.utils.FrameType;
 
+
+@JsonPropertyOrder({"frameNumber", "firstRoll", "secondRoll", "thirdRoll", "total", "frameType", "frameComplete"})
 public class Frame {
 
     private Integer firstRoll;
     private Integer secondRoll;
     private Integer thirdRoll;
     private FrameType frameType;
+    private boolean frameComplete;
     private int total;
 
 
@@ -44,6 +48,7 @@ public class Frame {
 
     public void setCurrentRoll(Integer currentRoll) { this.currentRoll = currentRoll; }
 
+
     public Integer getCurrentRoll() { return currentRoll; }
 
     public Integer getFirstRoll() {
@@ -58,6 +63,10 @@ public class Frame {
         return thirdRoll;
     }
 
+    public boolean isFrameComplete() {
+        return frameComplete;
+    }
+
     public Integer getFrameNumber() {
         return frameNumber;
     }
@@ -70,5 +79,6 @@ public class Frame {
 
     public void setTotal(int total) {
         this.total = total;
+        frameComplete = true;
     }
 }
